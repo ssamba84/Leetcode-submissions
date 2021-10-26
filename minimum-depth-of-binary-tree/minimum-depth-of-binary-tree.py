@@ -5,19 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    
     def minDepth(self, root: Optional[TreeNode]) -> int:
+        res = math.inf
         if root is None:
             return 0
-        res = math.inf
-        q = [(root,1)]
-        while len(q)>0:
-            node, d = q.pop(0)
-            if d >= res:
-                continue
-            if node.left is None and node.right is None:
-                res = min(res, d)
-            if node.left:
-                q.append((node.left,d+1))
-            if node.right:
-                q.append((node.right, d+1))
+        def helper(root, d):
+            nonlocal res
+            if root is None:
+                return
+            if root.left is None and root.right is None:
+                res = min(res, d+1)
+            helper(root.left, d+1)
+            helper(root.right, d+1)
+        helper(root, 0)
         return res
