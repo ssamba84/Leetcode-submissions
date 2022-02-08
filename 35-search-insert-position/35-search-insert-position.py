@@ -4,8 +4,7 @@ class Solution:
         r = len(nums)-1
         if target > nums[-1]:
             return len(nums)
-        if target < nums[0]:
-            return 0
+
         while l < r:
             m = (r-l)//2+l
             M = nums[m]
