@@ -23,14 +23,14 @@ class Solution:
             res += pc
             pf += 1
             cf,cc = heapq.heappop(hp)
-            if pc == cc:
-                return ""
+            
             if pf != 0:
                 heapq.heappush(hp, (pf,pc))
             pc,pf = cc,cf
-        if pf != -1:
+        res += pc
+        if len(res)!=len(s):
             return ""
-        return res+pc
+        return res
             
             
             
