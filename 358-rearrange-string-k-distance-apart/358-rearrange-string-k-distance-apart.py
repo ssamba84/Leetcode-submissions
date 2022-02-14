@@ -1,26 +1,26 @@
 class Solution:
     def rearrangeString(self, s: str, K: int) -> str:
+        '''
+        aabbcc
+        '''
         if K == 0:
             return s
-        ht = Counter(s)
-        hp = []
-        for k,v in ht.items():
-            heapq.heappush(hp, (-v,k))
+        sc = Counter(s)
         q = []
-        ret = ""
+        hp = []
+        for k,c in sc.items():
+            heapq.heappush(hp, (-c,k))
+        
+        res = ""
         while len(hp) > 0:
-            #if len(hp)>0:
-            cv, ck = heapq.heappop(hp)
-            #else:
-            #    cv,ck = q.pop(0)
-            ret += ck
-            cv += 1
-            
-            q.append((cv, ck))
+            c,k = heapq.heappop(hp)
+            res += k
+            c += 1
+            q.append((c,k))
             if len(q) == K:
-                v,k = q.pop(0)
-                if v != 0:
-                    heapq.heappush(hp, (v,k))
-        if len(ret) == len(s):
-            return ret
+                c,k = q.pop(0)
+                if c != 0:
+                    heapq.heappush(hp,(c,k))
+        if len(res) == len(s):
+            return res
         return ""
