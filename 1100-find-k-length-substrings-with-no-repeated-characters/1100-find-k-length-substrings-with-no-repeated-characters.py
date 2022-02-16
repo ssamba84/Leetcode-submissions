@@ -12,14 +12,21 @@ class Solution:
                 if n > 1:
                     return False
             return True
+        numrepeat = 0
         for r,c in enumerate(s):
             c = ord(c)-ord('a')
+            if ht[c] != 0:
+                numrepeat += 1
             ht[c] += 1
+            
             if (r-l+1) == k:
-                if check(ht):
+                if numrepeat == 0:
                     res += 1
                 
                 L = ord(s[l])-ord('a')
+                if ht[L] > 1:
+                    numrepeat -= 1
                 ht[L] -= 1
+                
                 l += 1
         return res
