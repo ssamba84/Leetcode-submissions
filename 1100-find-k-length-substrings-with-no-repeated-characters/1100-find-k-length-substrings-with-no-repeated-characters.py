@@ -7,11 +7,7 @@ class Solution:
         
         ht = [0]*26
         l = r = res = 0
-        def check(ht):
-            for n in ht:
-                if n > 1:
-                    return False
-            return True
+
         numrepeat = 0
         for r,c in enumerate(s):
             c = ord(c)-ord('a')
