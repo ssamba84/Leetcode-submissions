@@ -8,7 +8,6 @@ class Solution:
             l1, l2 = total_len//2-1, total_len//2
         i1 = i2 = 0
         i = -1
-        print (l1,l2)
         def getn(arr, i):
             if i<len(arr):
                 return arr[i]
