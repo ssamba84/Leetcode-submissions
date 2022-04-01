@@ -1,7 +1,7 @@
 class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         seen = set(words)
-        #@lru_cache(None)
+        @lru_cache(None)
         def check(word, i, prefix):
             suffix = word[i+1:]
             
