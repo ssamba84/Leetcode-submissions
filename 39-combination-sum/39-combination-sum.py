@@ -1,14 +1,16 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ret = []
-        def helper(i,rem, curr):
-            if rem == 0:
+        ht = {}
+        def helper(i,csum, curr):
+            if csum == 0:
                 ret.append(list(curr))
                 return
-            if i < 0 or i >= len(candidates):
+            if i == len(candidates) or csum < 0:
                 return
-            if rem >= candidates[i]:
-                helper(i, rem-candidates[i], curr+[candidates[i]])
-            helper(i+1, rem, curr)
-        helper(0,target, [])
+            if candidates[i] <= target:
+                helper(i, csum-candidates[i], curr+[candidates[i]])
+            helper(i+1, csum, curr)
+        helper(0,target,[])
         return ret
+            
