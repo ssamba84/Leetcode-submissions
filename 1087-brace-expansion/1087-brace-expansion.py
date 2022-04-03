@@ -8,6 +8,7 @@ class Solution:
                 end += 1
             optionsubarray = s[start+1:end]
             return (optionsubarray.split(','), end+1)
+        @lru_cache(None)
         def helper(curr, i):
             if i == len(s):
                 res.append(curr)
