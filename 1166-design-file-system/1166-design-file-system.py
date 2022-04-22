@@ -2,32 +2,33 @@ class FileSystem:
 
     def __init__(self):
         self.fs = {}
-
+    
     def createPath(self, path: str, value: int) -> bool:
-        path = path.split('/')[1:]
+        path = [p for p in path.split('/') if p != '']
         curr = self.fs
-        
-        for files in path[:-1]:
-            if files not in curr:
+        for f in path[:-1]:
+            if f not in curr:
                 return False
-            curr = curr[files]
-        if path[-1] in curr:
+            curr = curr[f]
+        lastdir = path[-1]
+        if lastdir not in curr:
+            curr[lastdir] = {}
+            curr[lastdir]['$'] = value
+            return True
+        else:
             return False
-        curr[path[-1]] = {}
-        curr[path[-1]]['#'] = value
-        return True
-
     def get(self, path: str) -> int:
-        path = path.split('/')[1:]
+        path = [p for p in path.split('/') if p != '']
         curr = self.fs
-
-        for files in path:
-            if files in curr:
-                curr = curr[files]
-            else:
+        for f in path[:-1]:
+            if f not in curr:
                 return -1
-        
-        return curr.get('#',-1)
+            curr = curr[f]
+        lastdir = path[-1]
+        if lastdir not in curr:
+            return -1
+        return curr[path[-1]].get('$',-1)
+         
 
 
 # Your FileSystem object will be instantiated and called as such:
